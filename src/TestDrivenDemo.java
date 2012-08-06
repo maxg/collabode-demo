@@ -12,7 +12,6 @@ public class TestDrivenDemo extends Demo {
     }
     
     @Step(1) public void setup() {
-        driver.login("robot");
         driver.get(project + "/src/MachineAndTests.java");
     }
     
@@ -46,8 +45,6 @@ public class TestDrivenDemo extends Demo {
     
     @Step(30) public void markAccepted() {
         driver.findElement(By.cssSelector(".test.needsreview button")).click();
-    }
-    
-    @Step(100) public void holdForApplause() {
+        driver.waitForSync();
     }
 }

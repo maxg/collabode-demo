@@ -12,7 +12,6 @@ public class CollabDemo extends Demo {
     }
     
     @Step(1) public void setup() {
-        driver.login("robot");
         driver.get(project + "/src/HelloWorld.java");
     }
     
@@ -34,8 +33,5 @@ public class CollabDemo extends Demo {
         WebElement content = driver.switchToEditorInner();
         driver.findEditorLine("cow").click();
         sendKeysSlowly(content, 200, " moon\");");
-    }
-    
-    @Step(100) public void holdForApplause() {
     }
 }

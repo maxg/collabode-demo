@@ -1,15 +1,10 @@
 import static org.openqa.selenium.Keys.*;
 
-import java.net.MalformedURLException;
-
 import org.openqa.selenium.*;
 
 public class GoogleDocsDemo extends Demo {
     
-    private WebDriver driver = super.driver.driver;
-    
-    GoogleDocsDemo() throws MalformedURLException {
-    }
+    private WebDriver driver = Demo.driver.driver;
     
     @Step(1) public void setup() {
         driver.get("https://docs.google.com/document/d/1Y9tT9wPaF4b-zZ8X2O61RLyvNYrNBS3gmTmfhuan6TM/edit");
@@ -27,8 +22,5 @@ public class GoogleDocsDemo extends Demo {
         sendKeysSlowly(target, 10, END, ENTER, "This paper descibes Collabode");
         sleep(1000);
         sendKeysSlowly(target, 10, END, ", a web-based Java IDE for close collaboration between programmers.");
-    }
-    
-    @Step(100) public void holdForApplause() {
     }
 }

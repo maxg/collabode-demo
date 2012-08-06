@@ -3,7 +3,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
 
@@ -28,6 +27,7 @@ public class Demo {
         new GoogleDocsDemo().run();
         new CollabDemo().run();
         new TestDrivenDemo().run();
+        driver.quit();
     }
     
     private static final Properties config = new Properties();
@@ -35,6 +35,9 @@ public class Demo {
     private static final String collabode;
     private static final DefaultHttpClient admin = new DefaultHttpClient();
     private static final StatusHandler handler = new StatusHandler();
+    
+    protected static final CollabodeDriver driver;
+    
     static {
         try {
             config.load(new FileInputStream("config/demo.properties"));
@@ -44,19 +47,16 @@ public class Demo {
                       new BasicNameValuePair("username", config.getProperty("username")),
                       new BasicNameValuePair("password", config.getProperty("password")),
                       new BasicNameValuePair("rusername", null));
+            
+            WebDriver web;
+            if (config.containsKey("selenium")) {
+                web = new RemoteWebDriver(new URL(selenium), DesiredCapabilities.firefox());
+            } else {
+                web = new FirefoxDriver();
+            }
+            driver = new CollabodeDriver(collabode, web);
+            driver.login("robot");
         } catch (IOException ioe) { throw new Error(ioe); }
-    }
-    
-    final CollabodeDriver driver;
-    
-    Demo() throws MalformedURLException {
-        WebDriver web;
-        if (config.containsKey("selenium")) {
-            web = new RemoteWebDriver(new URL(selenium), DesiredCapabilities.firefox());
-        } else {
-            web = new FirefoxDriver();
-        }
-        driver = new CollabodeDriver(collabode, web);
     }
     
     void run() throws IllegalArgumentException, IllegalAccessException, InvocationTargetException, IOException, DemoException {
@@ -84,7 +84,6 @@ public class Demo {
         }
         
         System.out.println("Done");
-        driver.quit();
     }
     
     void sleep(long millis) {
@@ -161,7 +160,7 @@ enum Command {
     },
     quit {
         public void exec(Demo self) throws DemoException {
-            self.driver.quit();
+            Demo.driver.quit();
             throw new QuitException();
         }
     };
