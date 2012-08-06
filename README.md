@@ -16,3 +16,8 @@ Generating Eclipse configuration files
 
     mvn eclipse:clean eclipse:eclipse replacer:replace
 
+
+Running the demo
+----------------
+
+    mvn clean compile exec:java -Dexec.mainClass=Demo
