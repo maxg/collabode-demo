@@ -24,9 +24,9 @@ public class CollabDemo extends Demo {
     @Step(11) public void addGreet() {
         WebElement content = driver.switchToEditorInner();
         driver.findEditorLine("HelloWorld", 1).click();
-        sendKeysSlowly(content, 50, "public static void greet(String thing) {", ENTER);
-        sendKeysSlowly(content, 50, "System.out.println(\"Hello, \" + thing + \"!\");", ENTER);
-        sendKeysSlowly(content, 50, BACK_SPACE, "}", ENTER);
+        sendKeysSlowly(content, 10, "public static void greet(String thing) {", ENTER);
+        sendKeysSlowly(content, 10, "System.out.println", ESCAPE, "(\"Hello, \" + thing + \"!\");", ENTER);
+        sendKeysSlowly(content, 10, BACK_SPACE, "}", ENTER);
     }
     
     @Step(12) public void finishAddingCow() {
