@@ -19,16 +19,18 @@ public class TestDrivenDemo extends Demo {
         WebElement content = driver.switchToEditorInner();
         driver.findEditorLine("MachineAndTests", 2).click();
         content.sendKeys("@Test public void testConstructor() {", ENTER);
-        content.sendKeys("new Machine(System.in", ESCAPE, "System.out", ESCAPE, ");", ENTER);
+        content.sendKeys("new Machine(System.in", ESCAPE, ", System.out", ESCAPE, ")", ESCAPE, ";", ENTER);
         content.sendKeys(BACK_SPACE, "}");
         driver.waitForSync();
         driver.switchToPage().findElement(By.id("forcecommit")).click();
+        driver.waitForSync();
+        driver.get(project + "/src/FooTest.java");
     }
     
     @Step(11) public void markNeedsImpl() {
-        WebElement content = driver.switchToEditorInner();
-        driver.findEditorLine("testConstructor").click();
-        content.sendKeys(HOME, RIGHT, RIGHT, RIGHT, RIGHT, "@NeedsImpl ");
+        driver.findElement(By.cssSelector(".test.new button")).click();
+        driver.waitForSync();
+        driver.get(project + "/src/MachineAndTests.java");
     }
     
     @Step(20) public void anotherTest() {
