@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -20,6 +21,7 @@ public class DemoDriver implements WebDriver, JavascriptExecutor {
     public DemoDriver(String baseUrl, WebDriver driver) {
         this.baseUrl = baseUrl;
         this.driver = driver;
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         this.wait = new WebDriverWait(driver, 20);
     }
     
