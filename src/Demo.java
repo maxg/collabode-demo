@@ -36,7 +36,7 @@ public class Demo {
     private static final DefaultHttpClient admin = new DefaultHttpClient();
     private static final StatusHandler handler = new StatusHandler();
     
-    protected static final CollabodeDriver driver;
+    protected static final DemoDriver driver;
     
     static {
         try {
@@ -54,7 +54,7 @@ public class Demo {
             } else {
                 web = new FirefoxDriver();
             }
-            driver = new CollabodeDriver(collabode, web);
+            driver = new DemoDriver(collabode, web);
             driver.login("robot");
         } catch (IOException ioe) { throw new Error(ioe); }
     }

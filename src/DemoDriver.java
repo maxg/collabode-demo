@@ -8,7 +8,7 @@ import com.google.common.base.Predicate;
 /**
  * Represents a web browser using Collabode.
  */
-public class CollabodeDriver implements WebDriver, JavascriptExecutor {
+public class DemoDriver implements WebDriver, JavascriptExecutor {
     
     public final String baseUrl;
     /**
@@ -17,7 +17,7 @@ public class CollabodeDriver implements WebDriver, JavascriptExecutor {
     public final WebDriver driver;
     public final WebDriverWait wait;
     
-    public CollabodeDriver(String baseUrl, WebDriver driver) {
+    public DemoDriver(String baseUrl, WebDriver driver) {
         this.baseUrl = baseUrl;
         this.driver = driver;
         this.wait = new WebDriverWait(driver, 20);
@@ -65,7 +65,7 @@ public class CollabodeDriver implements WebDriver, JavascriptExecutor {
      * 
      * @return this
      */
-    public CollabodeDriver waitForSync() {
+    public DemoDriver waitForSync() {
         switchToPage();
         final WebElement connecting = driver.findElement(By.id("connstatusconnecting"));
         new WebDriverWait(driver, 2).until(new Predicate<WebDriver>() {
@@ -87,7 +87,7 @@ public class CollabodeDriver implements WebDriver, JavascriptExecutor {
      * 
      * @return this
      */
-    public CollabodeDriver waitForSyncing() {
+    public DemoDriver waitForSyncing() {
         switchToPage();
         final WebElement syncing = driver.findElement(By.id("syncstatussyncing"));
         try {
