@@ -27,6 +27,7 @@ public class Demo {
         new GoogleDocsDemo().run();
         new CollabDemo().run();
         new TestDrivenDemo().run();
+        new OutsourceDemo(config.getProperty("instawork")).run();
         driver.quit();
     }
     
